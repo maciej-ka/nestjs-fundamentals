@@ -8,14 +8,22 @@ import {
   Patch,
   Post,
   Query,
-  Res,
 } from '@nestjs/common';
+import { CoffeesService } from './coffees.service';
+import { Coffee } from './entities/coffee.entity';
 
 @Controller('coffees')
 export class CoffeesController {
+  constructor(private readonly coffeesService: CoffeesService) {}
+
+  // @Get()
+  // findAll(@Res() response) {
+  //   response.status(200).send('all coffees');
+  // }
+
   @Get()
-  findAll(@Res() response) {
-    response.status(200).send('all coffees');
+  findAll() {
+    return this.coffeesService.findAll()
   }
 
   @Get("/paging")
@@ -30,22 +38,22 @@ export class CoffeesController {
 
   @Get(':id')
   findOne(@Param('id') id: string) {
-    return `one coffee by id ${id}`;
+    return this.coffeesService.findOne(id);
   }
 
   @Post()
   @HttpCode(410)
-  create(@Body() body) {
-    return body;
+  create(@Body() body: Coffee) {
+    this.coffeesService.create(body);
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() body) {
-    return `updates ${id} with ${JSON.stringify(body)}`;
+  update(@Param('id') id: string, @Body() body: Partial<Coffee>) {
+    this.coffeesService.update(id, body)
   }
 
   @Delete(':id')
   remove(@Param('id') id: string) {
-    return `deletes ${id}`;
+    this.coffeesService.remove(id)
   }
 }
