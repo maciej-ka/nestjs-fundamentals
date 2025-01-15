@@ -16,23 +16,24 @@ export class CoffeesService {
     return this.coffees;
   }
 
-  findOne(id: string) {
-    return this.coffees.find(item => item.id === +id)
+  findOne(id: number) {
+    return this.coffees.find(item => item.id === id)
   }
 
   create(createCoffeeDto: any) {
     this.coffees.push(createCoffeeDto)
   }
 
-  update(id: string, updateCoffeeeDto: Partial<Coffee>) {
+  update(id: number, updateCoffeeeDto: Partial<Coffee>) {
     const existingCoffee = this.findOne(id)
     if (existingCoffee) {
       // update
+      console.log(updateCoffeeeDto);
     }
   }
 
-  remove(id: string) {
-    const coffeeeIndex = this.coffees.findIndex(item => item.id === +id)
+  remove(id: number) {
+    const coffeeeIndex = this.coffees.findIndex(item => item.id === id)
     if (coffeeeIndex >= 0) {
       this.coffees.splice(coffeeeIndex, 1)
     }

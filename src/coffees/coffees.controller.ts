@@ -39,7 +39,8 @@ export class CoffeesController {
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
+  findOne(@Param('id') id: number) {
+    console.log(typeof id);
     const found = this.coffeesService.findOne(id);
     if (!found) {
       throw new NotFoundException(`coffeee ${id} not found`)
@@ -56,12 +57,12 @@ export class CoffeesController {
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateCoffeeDto: UpdateCoffeeDto) {
+  update(@Param('id') id: number, @Body() updateCoffeeDto: UpdateCoffeeDto) {
     this.coffeesService.update(id, updateCoffeeDto)
   }
 
   @Delete(':id')
-  remove(@Param('id') id: string) {
+  remove(@Param('id') id: number) {
     this.coffeesService.remove(id)
   }
 }
