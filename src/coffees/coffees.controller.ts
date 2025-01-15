@@ -7,6 +7,7 @@ import {
   Param,
   Patch,
   Post,
+  Query,
   Res,
 } from '@nestjs/common';
 
@@ -15,6 +16,11 @@ export class CoffeesController {
   @Get()
   findAll(@Res() response) {
     response.status(200).send('all coffees');
+  }
+
+  @Get("/paging")
+  getPage(@Query() query) {
+    return `page ${query.page} with limit ${query.limit}`
   }
 
   @Get('flavors')
