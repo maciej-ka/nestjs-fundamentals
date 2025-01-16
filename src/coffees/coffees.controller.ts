@@ -17,11 +17,6 @@ import { UpdateCoffeeDto } from './dto/create-coffee.dto/update-coffee.dto';
 export class CoffeesController {
   constructor(private readonly coffeesService: CoffeesService) {}
 
-  // @Get()
-  // findAll(@Res() response) {
-  //   response.status(200).send('all coffees');
-  // }
-
   @Get()
   findAll() {
     return this.coffeesService.findAll()
