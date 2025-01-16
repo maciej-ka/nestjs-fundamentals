@@ -4,7 +4,6 @@ import {
   Delete,
   Get,
   HttpCode,
-  NotFoundException,
   Param,
   Patch,
   Post,
@@ -29,7 +28,7 @@ export class CoffeesController {
   }
 
   @Get("/paging")
-  getPage(@Query() query) {
+  getPage(@Query() query: Record<string, string>) {
     return `page ${query.page} with limit ${query.limit}`
   }
 
@@ -40,12 +39,7 @@ export class CoffeesController {
 
   @Get(':id')
   findOne(@Param('id') id: number) {
-    console.log(typeof id);
-    const found = this.coffeesService.findOne(id);
-    if (!found) {
-      throw new NotFoundException(`coffeee ${id} not found`)
-    }
-    return found;
+    return this.coffeesService.findOne(id);
   }
 
   @Post()
