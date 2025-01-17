@@ -1,4 +1,4 @@
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, Index, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity()
 export class Event {
@@ -9,6 +9,7 @@ export class Event {
   type: string
 
   @Column()
+  @Index()
   name: string
 
   @Column('json')
