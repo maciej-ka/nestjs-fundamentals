@@ -12,19 +12,15 @@ import {
 import { CoffeesService } from './coffees.service';
 import { CreateCoffeeDto } from './dto/create-coffee.dto/create-coffee.dto';
 import { UpdateCoffeeDto } from './dto/create-coffee.dto/update-coffee.dto';
+import PaginationDto from 'src/common/dto/pagination-query.dto';
 
 @Controller('coffees')
 export class CoffeesController {
   constructor(private readonly coffeesService: CoffeesService) {}
 
   @Get()
-  findAll() {
-    return this.coffeesService.findAll()
-  }
-
-  @Get("/paging")
-  getPage(@Query() query: Record<string, string>) {
-    return `page ${query.page} with limit ${query.limit}`
+  getPage(@Query() paginationQuery: PaginationDto) {
+    return this.coffeesService.findAll(paginationQuery)
   }
 
   @Get('flavors')
