@@ -20,7 +20,7 @@ export class CoffeesController {
 
   @Get()
   getPage(@Query() paginationQuery: PaginationDto) {
-    return this.coffeesService.findAll(paginationQuery)
+    return this.coffeesService.findAll(paginationQuery);
   }
 
   @Get('flavors')
@@ -36,18 +36,27 @@ export class CoffeesController {
   @Post()
   @HttpCode(410)
   create(@Body() createCoffeeDto: CreateCoffeeDto) {
-    console.log("is dto an instance of createCoffeeeDto:", createCoffeeDto instanceof CreateCoffeeDto);
+    console.log(
+      'is dto an instance of createCoffeeeDto:',
+      createCoffeeDto instanceof CreateCoffeeDto,
+    );
     this.coffeesService.create(createCoffeeDto);
-    return createCoffeeDto
+    return createCoffeeDto;
   }
 
   @Patch(':id')
   update(@Param('id') id: number, @Body() updateCoffeeDto: UpdateCoffeeDto) {
-    this.coffeesService.update(id, updateCoffeeDto)
+    this.coffeesService.update(id, updateCoffeeDto);
   }
 
   @Delete(':id')
   remove(@Param('id') id: number) {
-    this.coffeesService.remove(id)
+    this.coffeesService.remove(id);
+  }
+
+  @Post('recommend/:id')
+  async recommend(@Param('id') id: number) {
+    const coffee = await this.coffeesService.findOne(id);
+    return await this.coffeesService.recommendCoffee(coffee);
   }
 }
