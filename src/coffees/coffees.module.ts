@@ -12,7 +12,7 @@ import { COFFEE_BRANDS } from './coffees.constants';
   controllers: [CoffeesController],
   providers: [
     CoffeesService,
-    { provide: COFFEE_BRANDS, useValue: ['buddy brew', 'nescafe'] },
+    { provide: COFFEE_BRANDS, useFactory: () => ['buddy brew', 'nescafe'] },
   ],
   exports: [CoffeesService],
 })
