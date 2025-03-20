@@ -1,4 +1,4 @@
-import { Module } from '@nestjs/common';
+import { Module, Scope } from '@nestjs/common';
 import { CoffeesController } from './coffees.controller';
 import { CoffeesService } from './coffees.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
@@ -12,7 +12,11 @@ import { COFFEE_BRANDS } from './coffees.constants';
   controllers: [CoffeesController],
   providers: [
     CoffeesService,
-    { provide: COFFEE_BRANDS, useFactory: () => ['buddy brew', 'nescafe'] },
+    {
+      provide: COFFEE_BRANDS,
+      useFactory: () => ['buddy brew', 'nescafe'],
+      scope: Scope.TRANSIENT,
+    },
   ],
   exports: [CoffeesService],
 })

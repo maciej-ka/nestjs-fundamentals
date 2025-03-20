@@ -4,6 +4,7 @@ import {
   Delete,
   Get,
   HttpCode,
+  Inject,
   Param,
   Patch,
   Post,
@@ -13,10 +14,18 @@ import { CoffeesService } from './coffees.service';
 import { CreateCoffeeDto } from './dto/create-coffee.dto/create-coffee.dto';
 import { UpdateCoffeeDto } from './dto/create-coffee.dto/update-coffee.dto';
 import PaginationDto from 'src/common/dto/pagination-query.dto';
+import { Request } from 'express';
+import { REQUEST } from '@nestjs/core';
 
 @Controller('coffees')
 export class CoffeesController {
-  constructor(private readonly coffeesService: CoffeesService) {}
+  constructor(
+    private readonly coffeesService: CoffeesService,
+    @Inject(REQUEST) private readonly request: Request,
+  ) {
+    console.log('Coffees Controller instantiated');
+    console.log(request.method, request.ip);
+  }
 
   @Get()
   getPage(@Query() paginationQuery: PaginationDto) {
