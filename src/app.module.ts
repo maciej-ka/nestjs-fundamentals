@@ -21,14 +21,14 @@ import appConfig from './config/app.config';
         database: process.env.DATABASE_NAME,
         autoLoadEntities: true,
         synchronize: true,
-      })
+      }),
     }),
     ConfigModule.forRoot({
       load: [appConfig],
       validationSchema: Joi.object({
         DATABASE_HOST: Joi.required(),
         DATABASE_PORT: Joi.number().default(5432),
-      })
+      }),
     }),
     CoffeesModule,
     CoffeeRatingModule,
