@@ -19,6 +19,7 @@ import { Request } from 'express';
 import { REQUEST } from '@nestjs/core';
 import { Public } from 'src/common/decorators/public.decorator';
 import { ParseIntPipe } from 'src/common/pipes/parse-int/parse-int.pipe';
+import { Protocol } from 'src/common/decorators/protocol.decorator';
 
 @Controller('coffees')
 export class CoffeesController {
@@ -42,7 +43,8 @@ export class CoffeesController {
   }
 
   @Get(':id')
-  async findOne(@Param('id', ParseIntPipe) id: number) {
+  async findOne(@Protocol('https') protocol: string, @Param('id', ParseIntPipe) id: number) {
+    console.log(protocol);
     console.log(id);
     // await new Promise(resolve => setTimeout(resolve, 5000))
     return this.coffeesService.findOne(id);
