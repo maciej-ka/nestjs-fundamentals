@@ -54,7 +54,7 @@ export class CoffeesController {
   }
 
   @Post()
-  @HttpCode(410)
+  // @HttpCode(410)
   create(@Body() createCoffeeDto: CreateCoffeeDto) {
     console.log(
       'is dto an instance of createCoffeeeDto:',
