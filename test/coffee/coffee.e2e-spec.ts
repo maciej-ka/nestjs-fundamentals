@@ -15,7 +15,7 @@ describe('[Feature] Coffees - /coffees', () => {
           host: 'localhost',
           port: 5433,
           username: 'postgres',
-          password: 'postgres',
+          password: 'pass123',
           database: 'postgres',
           autoLoadEntities: true,
           synchronize: true,
